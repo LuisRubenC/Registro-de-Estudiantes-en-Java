@@ -42,6 +42,7 @@ public class Registro {
             case 3:
                 break;
             case 4:
+                EliminarEstudiante(scanner, numEstudiantes, estudiantes);
                 break;
             case 5:
                 System.out.println("Gracias por utilizar el programa...");
@@ -54,6 +55,7 @@ public class Registro {
     }while(op != 5);
 
     scanner.close();
+
     }
 
     public static int RegistrarEstudiante(Scanner scanner,int numEstudiantes, Estudiantes[] estudiantes){
@@ -82,4 +84,26 @@ public class Registro {
         return 0;
     }
 
+   
+    public static void EliminarEstudiante(Scanner scanner, int numEstudiantes, Estudiantes[] estudiantes) {
+        System.out.print("Ingrese la matrícula del estudiante a eliminar: ");
+        int matriculaEliminar = scanner.nextInt();
+        boolean eliminado = false;
+
+        for (int i = 0; i < numEstudiantes; i++) {
+            if (estudiantes[i].matricula == matriculaEliminar) {
+                for (int j = i; j < numEstudiantes - 1; j++) {
+                    estudiantes[j] = estudiantes[j + 1];
+                }
+                numEstudiantes--;
+                eliminado = true;
+                System.out.println("Estudiante eliminado con éxito.");
+                break;
+            }
+        }
+
+        if (!eliminado) {
+            System.out.println("Estudiante no encontrado.");
+        }
+    }
 }
