@@ -55,6 +55,7 @@ public class Registro {
     }while(op != 5);
 
     scanner.close();
+
     }
 
     public static int RegistrarEstudiante(Scanner scanner,int numEstudiantes, Estudiantes[] estudiantes){
@@ -82,6 +83,8 @@ public class Registro {
 
         return 0;
     }
+
+   
     public static void EliminarEstudiante(Scanner scanner, int numEstudiantes, Estudiantes[] estudiantes) {
         System.out.print("Ingrese la matrícula del estudiante a eliminar: ");
         int matriculaEliminar = scanner.nextInt();
