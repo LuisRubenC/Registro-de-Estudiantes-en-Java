@@ -8,7 +8,7 @@ class Estudiantes{
     String carrera;
 
 }
-//ejemplo de subir un archivo 
+ 
 public class Registro {
 
     public static void main(String[] args) throws Exception {
@@ -39,9 +39,17 @@ public class Registro {
                 case 2:
                     break;
                 case 3:
+                    if (numEstudiantes == 0){
+                      System.out.println("Debes ingresar al menos un estudiante..."); 
+                    }
+                    else
                     BuscarEstudiantePorMatricula(scanner, estudiantes, numEstudiantes);
                     break;
                 case 4:
+                     if (numEstudiantes == 0){
+                      System.out.println("Debes ingresar al menos un estudiante..."); 
+                    }
+                    else
                     EliminarEstudiante(scanner, numEstudiantes, estudiantes);
                     break;
                 case 5:
@@ -99,6 +107,7 @@ public class Registro {
         nuevoEstudiante.matricula=20250000 + numeroAleatorio;
         estudiantes[numEstudiantes]=nuevoEstudiante;
         System.out.println("Estudiante registrado correctamente... ");
+        System.out.println("Boleta del estudiante registrado: "+ nuevoEstudiante.matricula);
 
         return 0;
     }
