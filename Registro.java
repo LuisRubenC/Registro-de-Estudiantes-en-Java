@@ -37,23 +37,11 @@ public class Registro {
                         numEstudiantes++;
                     break;
                 case 2:
-
+                    if (numEstudiantes == 0){
+                      System.out.println("Debes ingresar al menos un estudiante..."); 
+                    }
+                    else
                     MostrarEstudiantes(estudiantes, numEstudiantes);
-                    break;
-                case 3:
-                    if (numEstudiantes == 0) {
-                        System.out.println("Debes ingresar al menos un estudiante...");
-                    } else {
-                        BuscarEstudiantePorMatricula(scanner, estudiantes, numEstudiantes);
-                    }
-                    break;
-                case 4:
-                    if (numEstudiantes == 0) {
-                        System.out.println("Debes ingresar al menos un estudiante...");
-                    } else {
-                        EliminarEstudiante(scanner, numEstudiantes, estudiantes);
-                    }
-
                     break;
                 case 3:
                     if (numEstudiantes == 0){
@@ -131,8 +119,6 @@ public class Registro {
             return 1;
 
         }
-        System.out.println("No se encontró un estudiante con esa matrícula.");
-    }
         Estudiantes nuevoEstudiante = new Estudiantes();
         System.out.println("Ingrese el nombre del estudiante: ");
         nuevoEstudiante.nombre = scanner.nextLine();
@@ -149,56 +135,45 @@ public class Registro {
         return 0;
     }
 
-
-    public static int RegistrarEstudiante(Scanner scanner,int numEstudiantes, Estudiantes[] estudiantes){
-        
-        int i=0;
-        Random random = new Random();
-        int numeroAleatorio = 1000 + random.nextInt(9000); // Genera entre 1000 y 9999
-        
-        if(numEstudiantes>=99){
-            System.out.println("No es posible agregar un estudiante mas, borre alguno y vuelva a intentar...");
-            return 1;
-        }
-
-        Estudiantes nuevoEstudiante = new Estudiantes();
-        System.out.println("Ingrese el nombre del estudiante: ");
-        nuevoEstudiante.nombre=scanner.nextLine();
-        System.out.println("Ingrese la edad del estudiante: ");
-        nuevoEstudiante.edad=scanner.nextInt();
-        scanner.nextLine();
-        System.out.println("Ingrese la carrera del estudiante: ");
-        nuevoEstudiante.carrera=scanner.nextLine();
-        nuevoEstudiante.matricula=20250000 + numeroAleatorio;
-        estudiantes[numEstudiantes]=nuevoEstudiante;
-        System.out.println("Estudiante registrado correctamente... ");
-        System.out.println("Boleta del estudiante registrado: "+ nuevoEstudiante.matricula);
-
-        return 0;
-    }
-
    
 
-    public static void EliminarEstudiante(Scanner scanner, int numEstudiantes, Estudiantes[] estudiantes) {
-        System.out.print("Ingrese la matrícula del estudiante a eliminar: ");
-        int matriculaEliminar = scanner.nextInt();
-        boolean eliminado = false;
+   public static int EliminarEstudiante(Scanner scanner, int numEstudiantes, Estudiantes[] estudiantes) {
+    if (numEstudiantes == 0) {
+        System.out.println("No hay estudiantes registrados.");
+        return numEstudiantes;
+    }
 
-        for (int i = 0; i < numEstudiantes; i++) {
-            if (estudiantes[i].matricula == matriculaEliminar) {
-                for (int j = i; j < numEstudiantes - 1; j++) {
-                    estudiantes[j] = estudiantes[j + 1];
-                }
-                numEstudiantes--;
-                eliminado = true;
-                System.out.println("Estudiante eliminado con éxito.");
-                break;
+    System.out.print("Ingrese la matrícula del estudiante a eliminar: ");
+    
+    if (!scanner.hasNextInt()) { 
+        System.out.println("Error: Ingrese un número válido.");
+        scanner.next();  
+        return numEstudiantes;
+    }
+    
+    int matriculaEliminar = scanner.nextInt();
+    boolean eliminado = false;
+
+    for (int i = 0; i < numEstudiantes; i++) {
+        if (estudiantes[i].matricula == matriculaEliminar) {
+            for (int j = i; j < numEstudiantes - 1; j++) {
+                estudiantes[j] = estudiantes[j + 1]; 
             }
-        }
-
-        if (!eliminado) {
-            System.out.println("Estudiante no encontrado.");
+            estudiantes[numEstudiantes - 1] = null;  
+            numEstudiantes--;  
+            eliminado = true;
+            System.out.println("Estudiante eliminado con éxito.");
+            break;
         }
     }
+
+    if (!eliminado) {
+        System.out.println("Estudiante no encontrado.");
+    }
+
+    return numEstudiantes;  // Devuelve el nuevo número de estudiantes
+}
+
+
 }
 
