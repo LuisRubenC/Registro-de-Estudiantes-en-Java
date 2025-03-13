@@ -86,7 +86,16 @@ public class Registro {
 
    
     public static void EliminarEstudiante(Scanner scanner, int numEstudiantes, Estudiantes[] estudiantes) {
+        if (numEstudiantes == 0) {
+        System.out.println("No hay estudiantes registrados.");
+        return numEstudiantes;
+        }
         System.out.print("Ingrese la matrícula del estudiante a eliminar: ");
+        if (!scanner.hasNextInt()) { 
+            System.out.println("Error: Ingrese un número válido.");
+            scanner.next();  
+            return numEstudiantes;
+        }
         int matriculaEliminar = scanner.nextInt();
         boolean eliminado = false;
 
